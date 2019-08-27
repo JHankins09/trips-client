@@ -9,12 +9,9 @@ class Trip extends Component {
   }
 
   async componentDidMount () {
-    console.log(this.props.user)
     const { user, setTrip } = this.props
-    console.log('id is: ', this.props.match.params.id)
     const id = this.props.match.params.id
     try {
-      console.log('user is ', user, 'id is ', id)
       showTrip(user, id)
         .then((response) =>
           this.setState({ trip: response.data.trip }))

@@ -44,6 +44,19 @@ export const createTrip = (trip, user) => {
   })
 }
 
+// Update Trip Requiest
+export const updateTrip = (trip, user) => {
+  return axios({
+    method: 'PATCH',
+    url: `${apiUrl}/trips/${trip._id}`,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data:
+      { trip }
+  })
+}
+
 // Delete Trip Request
 export const deleteTrip = (trip, user) => {
   return (axios({

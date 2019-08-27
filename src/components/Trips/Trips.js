@@ -18,33 +18,16 @@ class Trips extends Component {
       const response = await
       indexTrips(user)
       this.setState({ trips: response.data.trips })
-      console.log('response ', response.data)
     } catch (error) {
       console.error(error)
     }
   }
 
   render () {
-    // const destinations = this.state.trips._destinations
-    const destinationList = function (destinations) {
-      if (destinations) {
-        return (
-          <ul>
-            {destinations.map(location => (
-              <li key={location._id}>
-                <p>Stop {destinations.indexOf(location) + 1}</p>
-                <p>{location}</p>
-              </li>
-            ))}
-          </ul>
-        )
-      }
-    }
     const tripsJsx = this.state.trips.filter(trip => trip.owner === this.props.user._id).map(trip => (
       <div key={trip._id}>
         <li>
           <Link to={`trips/${trip._id}`}>{trip.name}</Link>
-          { trip._destinations && destinationList(trip._destinations) }
         </li>
       </div>
     ))

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
-import { createTrip } from './api'
+import { updateTrip } from './api'
 import Form from 'react-bootstrap/Form'
 
 import TripForm from './tripsForm.js'
 
-class CreateTrip extends Component {
+class UpdateTrip extends Component {
   state = {
     trip: {}
   }
@@ -18,7 +18,7 @@ class CreateTrip extends Component {
     event.preventDefault()
     console.log('event ', event)
     const { user } = this.props
-    createTrip(this.state.trip, user)
+    updateTrip(this.state.trip, user)
       .then((response) => {
         // this.props.history.push(`/trips/${response.data.book._id}`)  <--- Pushes to unique trip.
         this.props.history.push('/trips')
@@ -62,4 +62,4 @@ class CreateTrip extends Component {
   }
 }
 
-export default withRouter(CreateTrip)
+export default withRouter(UpdateTrip)

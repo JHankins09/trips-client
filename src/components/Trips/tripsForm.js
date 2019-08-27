@@ -2,6 +2,11 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+const TripStops = ({ trip }) => (
+  trip.destinations.map(destination => (
+    <li key={destination._id}> Stop {trip.destinations.indexOf(destination) + 1} is {destination.name} </li>
+  )))
+
 const TripForm = ({ trip, handleChange, handleSubmit, updateTrip }) => (
 
   <Form onSubmit={ handleSubmit }>
@@ -51,5 +56,7 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip }) => (
 
   </Form>
 )
+
+console.log(TripStops)
 
 export default TripForm

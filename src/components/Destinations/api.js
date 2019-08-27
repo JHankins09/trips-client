@@ -27,7 +27,7 @@ export const addDestination = (destination, user, trip) => {
   console.log('user info is ', user, 'trip info is ', trip)
   return axios({
     method: 'POST',
-    url: `${apiUrl}/trips`,
+    url: `${apiUrl}/destinations`,
     headers: {
       'Authorization': `Token token=${user.token}`
     },

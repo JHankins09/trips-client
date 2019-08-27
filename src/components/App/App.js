@@ -55,7 +55,7 @@ class App extends Component {
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
           <Route path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} {...console.log('Sign-in this ', this)} />
+            <SignIn alert={this.alert} setUser={this.setUser} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
@@ -70,7 +70,7 @@ class App extends Component {
             <CreateTrip user={user} />
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id' render={() => (
-            < Trip user={user} setTrip={this.setTrip} { ...console.log('this is ', this) } />
+            < Trip user={user} setTrip={this.setTrip} />
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id/edit' render={() => (
             < UpdateTrip user={user} trip={trip}/>
