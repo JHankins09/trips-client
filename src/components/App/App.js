@@ -15,6 +15,7 @@ import UpdateTrip from '../Trips/UpdateTrip'
 import AddDestination from '../Destinations/AddDestination.js'
 import DeleteTrip from '../Trips/DeleteTrip'
 import ShowDestination from '../Destinations/ShowDestination.js'
+import DeleteDestination from '../Destinations/DeleteDestination.js'
 
 class App extends Component {
   constructor () {
@@ -23,7 +24,8 @@ class App extends Component {
     this.state = {
       user: null,
       alerts: [],
-      trip: null
+      trip: null,
+      destination: null
     }
   }
 
@@ -40,11 +42,11 @@ class App extends Component {
   }
 
   render () {
-    const { alerts, user, trip } = this.state
+    const { alerts, user, trip, destination } = this.state
 
     return (
       <Fragment>
-        <Header user={user} trip={trip}/>
+        <Header user={user} trip={trip} destination={destination}/>
         {alerts.map((alert, index) => (
           <AutoDismissAlert
             key={index}
@@ -81,11 +83,14 @@ class App extends Component {
           <AuthenticatedRoute exact user={user} path='/trips/:id/add-destination' render={() => (
             < AddDestination user={user} trip={trip} />
           )} />
+          <AuthenticatedRoute user={user} trip={trip} path='/trips/:id/destinations/:id' render={() => (
+            < ShowDestination user={user} trip={trip} setTrip={this.setTrip} setDestination={this.setDestination} />
+          )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id/delete' render={() => (
             < DeleteTrip user={user} />
           )} />
-          <AuthenticatedRoute user={user} trip={trip} path='/trips/:id/destinations/:id' render={() => (
-            < ShowDestination user={user} trip={trip} setTrip={this.setTrip} setDestination={this.setDestination} />
+          <AuthenticatedRoute exact user={user} trip={trip} path='/trips/:id/destinations/:id/delete' render={() => (
+            <DeleteDestination user={user} trip={trip}/>
           )} />
         </main>
       </Fragment>

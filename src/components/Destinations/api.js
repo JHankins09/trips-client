@@ -43,3 +43,13 @@ export const showDestination = (user, id) => {
     }
   })
 }
+
+export const deleteDestination = (destination, user) => {
+  return (axios({
+    method: 'DELETE',
+    url: `${apiUrl}/destinations/${destination}`,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  }))
+}

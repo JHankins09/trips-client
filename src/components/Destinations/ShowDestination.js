@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showDestination } from './api'
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 
 class ShowDestination extends Component {
   state = {
@@ -34,14 +34,15 @@ class ShowDestination extends Component {
 
     return (
       <Fragment>
-        <h1>Welp... this is awkward...</h1>
         <div key={destination._id}>
           <ul>
             <li> You are at: {destination.name} </li>
             <li> This is stop {stops.indexOf(destination._id) + 1} on your journey! </li>
             <li> Only {stops.length - stops.indexOf(destination._id) - 1} stops remaining! </li>
-            <li> <button>Add a Peek!</button> </li>
-            <li> <button>Add a Pit :(</button> </li>
+            <li> <Button>Edit this destination</Button></li>
+            <li> <Button href={`#/trips/${trip._id}/destinations/${destination._id}/delete`}>
+            Delete this destination from your trip
+            </Button></li>
           </ul>
         </div>
       </Fragment>

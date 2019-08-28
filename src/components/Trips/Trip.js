@@ -39,7 +39,9 @@ class Trip extends Component {
     }
     fillEditButton()
 
-    const deleteButton = (<Button href={`#trips/${trip._id}/delete`}>Delete trip</Button>)
+    const deleteButton = (<Button
+      href={`#trips/${trip._id}/delete`}>
+      Delete trip</Button>)
 
     const addDestination = (
       <Button href={`#trips/${trip._id}/add-destination`}>Add a destination</Button>
