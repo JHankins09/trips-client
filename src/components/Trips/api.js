@@ -25,7 +25,6 @@ export const indexTrips = user => {
 
 // Create Trip Request
 export const createTrip = (trip, user) => {
-  console.log('user info is ', user, 'trip info is ', trip)
   return axios({
     method: 'POST',
     url: `${apiUrl}/trips`,
@@ -46,7 +45,6 @@ export const createTrip = (trip, user) => {
 
 // Update Trip Requiest
 export const updateTrip = (trip, user) => {
-  console.log('Patch Trip Is ', trip)
   return axios({
     method: 'PATCH',
     url: `${apiUrl}/trips/${trip._id}`,

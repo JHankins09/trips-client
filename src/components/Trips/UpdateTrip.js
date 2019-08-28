@@ -34,7 +34,6 @@ class UpdateTrip extends Component {
     try {
       this.setState({ user: this.props.user })
       this.setState({ trip: this.props.trip })
-      if (this.state.trip._id) { console.log('this is the trip ', this.state.trip) }
     } catch (error) {
       console.error(error)
     }

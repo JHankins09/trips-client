@@ -84,8 +84,8 @@ class App extends Component {
           <AuthenticatedRoute exact user={user} path='/trips/:id/delete' render={() => (
             < DeleteTrip user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/trips/:id/destinations/:id' render={() => (
-            < ShowDestination user={user} />
+          <AuthenticatedRoute user={user} trip={trip} path='/trips/:id/destinations/:id' render={() => (
+            < ShowDestination user={user} trip={trip} setTrip={this.setTrip} setDestination={this.setDestination} />
           )} />
         </main>
       </Fragment>

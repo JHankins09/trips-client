@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showDestination } from './api'
-import { showTrip } from '../Trips/api'
 // import Button from 'react-bootstrap/Button'
 
 class ShowDestination extends Component {
@@ -11,35 +10,41 @@ class ShowDestination extends Component {
   }
 
   async componentDidMount () {
-    const { user, setTrip, setDestination } = this.props
-    console.log(this.props)
-    const tripid = this.props.match.params.id
-    const destid = this.props.match
+    const { user, setDestination } = this.props
     try {
-      showTrip(user, tripid)
-        .then((response) =>
-          this.setState({ trip: response.data.trip }))
-        .then(() =>
-          setTrip(this.state.trip))
-      showDestination(user, destid)
-        .then((response) =>
-          this.setState({ trip: response.data.destination }))
-        .then(() =>
-          setDestination(this.state.destination))
+      this.setState({ trip: this.props.trip })
+      const dest =
+      await showDestination(user, this.props.match.params.id)
+      this.setState({ destination: dest.data.destination })
+      setDestination(this.state.destination)
     } catch (error) {
       console.error(error)
     }
   }
+
   // render
   render () {
-    // return
-    const { trip, destination } = this.state
-
-    console.log('Trip => ', trip)
-    console.log('Destination => ', destination)
+    const { destination } = this.state
+    const { trip } = this.props
+    const stops = []
+    for (let i = 0; i < Object.keys(trip.destinations).length; i++) {
+      stops.push(trip.destinations[i]._id)
+    }
+    console.log('Length Formula ', stops.length - stops.indexOf(destination._id) - 1)
 
     return (
-      <h1>Destination Content Goes Here!</h1>
+      <Fragment>
+        <h1>Welp... this is awkward...</h1>
+        <div key={destination._id}>
+          <ul>
+            <li> You are at: {destination.name} </li>
+            <li> This is stop {stops.indexOf(destination._id) + 1} on your journey! </li>
+            <li> Only {stops.length - stops.indexOf(destination._id) - 1} stops remaining! </li>
+            <li> <button>Add a Peek!</button> </li>
+            <li> <button>Add a Pit :(</button> </li>
+          </ul>
+        </div>
+      </Fragment>
     )
   }
 }

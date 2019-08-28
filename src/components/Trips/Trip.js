@@ -12,7 +12,6 @@ class Trip extends Component {
     const { user, setTrip } = this.props
     const id = this.props.match.params.id
     try {
-      console.log('Is this running?')
       showTrip(user, id)
         .then((response) =>
           this.setState({ trip: response.data.trip }))
