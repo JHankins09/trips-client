@@ -37,6 +37,7 @@ class CreateTrip extends Component {
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         trip={this.state.trip}
+        placeHolderTrip={this.state.trip}
       />
     )
   }

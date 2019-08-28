@@ -14,6 +14,7 @@ import Trip from '../Trips/Trip'
 import UpdateTrip from '../Trips/UpdateTrip'
 import AddDestination from '../Destinations/AddDestination.js'
 import DeleteTrip from '../Trips/DeleteTrip'
+import ShowDestination from '../Destinations/ShowDestination.js'
 
 class App extends Component {
   constructor () {
@@ -27,6 +28,8 @@ class App extends Component {
   }
 
   setTrip = trip => this.setState({ trip })
+
+  setDestination = destination => this.setState({ destination })
 
   setUser = user => this.setState({ user })
 
@@ -73,13 +76,16 @@ class App extends Component {
             < Trip user={user} setTrip={this.setTrip} />
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id/edit' render={() => (
-            < UpdateTrip user={user} trip={trip}/>
+            < UpdateTrip user={user} trip={trip} setTrip={this.setTrip}/>
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id/add-destination' render={() => (
             < AddDestination user={user} trip={trip} />
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id/delete' render={() => (
             < DeleteTrip user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/trips/:id/destinations/:id' render={() => (
+            < ShowDestination user={user} />
           )} />
         </main>
       </Fragment>

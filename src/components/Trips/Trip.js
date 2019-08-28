@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { showTrip } from './api'
 import Button from 'react-bootstrap/Button'
 
@@ -12,6 +12,7 @@ class Trip extends Component {
     const { user, setTrip } = this.props
     const id = this.props.match.params.id
     try {
+      console.log('Is this running?')
       showTrip(user, id)
         .then((response) =>
           this.setState({ trip: response.data.trip }))
@@ -45,15 +46,27 @@ class Trip extends Component {
       <Button href={`#trips/${trip._id}/add-destination`}>Add a destination</Button>
     )
 
+    let destinationJsx = 'Loading'
+    if (trip.destinations) {
+      destinationJsx = this.state.trip.destinations.map(stop => (
+        <li key={stop._id}>
+          Stop {this.state.trip.destinations.indexOf(stop) + 1} is: <Link to={`/trips/${trip._id}/destinations/${stop._id}`}>{stop.name}</Link>
+        </li>
+      ))
+    }
+
     return (
       <Fragment>
         {trip && (
           <Fragment>
             <h1>{trip.name}</h1>
             <h2>{trip.type || 'No Author Available'}</h2>
-            {addDestination}
-            {editButton}
-            {deleteButton}
+            <ul>
+              {destinationJsx}
+              {addDestination}
+              {editButton}
+              {deleteButton}
+            </ul>
           </Fragment>
         )}
       </Fragment>

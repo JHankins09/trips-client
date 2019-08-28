@@ -7,8 +7,7 @@ const TripStops = ({ trip }) => (
     <li key={destination._id}> Stop {trip.destinations.indexOf(destination) + 1} is {destination.name} </li>
   )))
 
-const TripForm = ({ trip, handleChange, handleSubmit, updateTrip }) => (
-
+const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTrip }) => (
   <Form onSubmit={ handleSubmit }>
 
     <Form.Group controlId="name">
@@ -16,7 +15,7 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip }) => (
       <Form.Control
         name="name"
         type="text"
-        placeholder="Name your trip!"
+        placeholder={ placeHolderTrip.name ? placeHolderTrip.name : 'Name your adventure!' }
         value={trip.name}
         onChange={handleChange}
         required
@@ -29,6 +28,7 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip }) => (
         name="type"
         as="select"
         value={trip.type}
+        placeholder={placeHolderTrip.type ? placeHolderTrip.type : ''}
         onChange={handleChange}
         required
       >

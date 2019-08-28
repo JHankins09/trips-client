@@ -2,7 +2,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const DestinationsForm = ({ destination, handleChange, handleSubmit, updateDestination }) => (
+const DestinationsForm = ({ destination, handleChange, handleSubmit, updateDestination, tripId }) => (
   <Form onSubmit={ handleSubmit }>
 
     <Form.Group controlId="name">

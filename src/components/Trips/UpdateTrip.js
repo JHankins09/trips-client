@@ -6,9 +6,15 @@ import Form from 'react-bootstrap/Form'
 import TripForm from './tripsForm.js'
 
 class UpdateTrip extends Component {
-  state = {
-    trip: {}
-  }
+    state = {
+      trip: {
+        name: '',
+        type: '',
+        private: false,
+        completed: false,
+        _duration: 0
+      }
+    }
 
   handleChange = event => {
     this.setState({ trip: { ...this.state.trip, [event.target.name]: event.target.value } })
@@ -16,14 +22,22 @@ class UpdateTrip extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('event ', event)
-    const { user } = this.props
-    updateTrip(this.state.trip, user)
+    updateTrip(this.state.trip, this.state.user)
       .then((response) => {
         // this.props.history.push(`/trips/${response.data.book._id}`)  <--- Pushes to unique trip.
         this.props.history.push('/trips')
       })
       .catch(console.error)
+  }
+
+  async componentDidMount () {
+    try {
+      this.setState({ user: this.props.user })
+      this.setState({ trip: this.props.trip })
+      if (this.state.trip._id) { console.log('this is the trip ', this.state.trip) }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render () {
@@ -57,6 +71,7 @@ class UpdateTrip extends Component {
         handleSubmit={this.handleSubmit}
         trip={this.state.trip}
         updateTrip={updateTrip}
+        placeHolderTrip={this.props.trip}
       />
     )
   }

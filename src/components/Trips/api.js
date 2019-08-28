@@ -46,14 +46,14 @@ export const createTrip = (trip, user) => {
 
 // Update Trip Requiest
 export const updateTrip = (trip, user) => {
+  console.log('Patch Trip Is ', trip)
   return axios({
     method: 'PATCH',
     url: `${apiUrl}/trips/${trip._id}`,
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data:
-      { trip }
+    data: { trip }
   })
 }
 
