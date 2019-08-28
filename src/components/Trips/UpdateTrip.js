@@ -22,7 +22,7 @@ class UpdateTrip extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    updateTrip(this.state.trip, this.state.user)
+    updateTrip(this.state.trip, this.props.user)
       .then((response) => {
         // this.props.history.push(`/trips/${response.data.book._id}`)  <--- Pushes to unique trip.
         this.props.history.push('/trips')
@@ -30,14 +30,15 @@ class UpdateTrip extends Component {
       .catch(console.error)
   }
 
-  async componentDidMount () {
-    try {
-      this.setState({ user: this.props.user })
-      this.setState({ trip: this.props.trip })
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // async componentDidMount () {
+  //   try {
+  //     this.setState({ user: this.props.user })
+  //     this.setState({ trip: this.props.trip })
+  //     console.log('this State is => ', this.state)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
   render () {
     let updateTrip = ''

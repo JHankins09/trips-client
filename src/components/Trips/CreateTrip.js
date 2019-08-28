@@ -25,8 +25,7 @@ class CreateTrip extends Component {
     const { user } = this.props
     createTrip(this.state.trip, user)
       .then((response) => {
-        // this.props.history.push(`/trips/${response.data.book._id}`)  <--- Pushes to unique trip.
-        this.props.history.push('/trips')
+        this.props.history.push(`/trips/${response.data.trip._id}/add-destination`)
       })
       .catch(console.error)
   }

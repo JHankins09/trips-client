@@ -31,9 +31,15 @@ class Trip extends Component {
     const fillEditButton = () => {
       if (this.props.user && trip) {
         if (this.props.user._id === trip.owner) {
-          editButton = (
-            <Button href={`#trips/${trip._id}/edit`}>Edit Trip</Button>
-          )
+          if (trip.destinations.length > 1) {
+            editButton = (
+              <Button href={`#trips/${trip._id}/edit`}>Edit Trip</Button>
+            )
+          } else {
+            editButton = (
+              <p>Add at least 1 more destination to start editing your trip!</p>
+            )
+          }
         }
       }
     }

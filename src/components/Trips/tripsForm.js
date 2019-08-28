@@ -48,8 +48,6 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTri
       onChange={handleChange}
     />
 
-    { updateTrip }
-
     <Button variant="primary" type="submit">
       Submit
     </Button>

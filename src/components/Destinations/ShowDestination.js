@@ -39,7 +39,7 @@ class ShowDestination extends Component {
             <li> You are at: {destination.name} </li>
             <li> This is stop {stops.indexOf(destination._id) + 1} on your journey! </li>
             <li> Only {stops.length - stops.indexOf(destination._id) - 1} stops remaining! </li>
-            <li> <Button>Edit this destination</Button></li>
+            <li> <Button href={`#/trips/${trip._id}/destinations/${destination._id}/edit`}>Edit this destination</Button></li>
             <li> <Button href={`#/trips/${trip._id}/destinations/${destination._id}/delete`}>
             Delete this destination from your trip
             </Button></li>
