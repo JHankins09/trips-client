@@ -1,14 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
-import { createTrip } from './api'
+import { updateTrip } from './api'
 import Form from 'react-bootstrap/Form'
 
 import TripForm from './tripsForm.js'
 
-class CreateTrip extends Component {
-  state = {
-    trip: {}
-  }
+class UpdateTrip extends Component {
+    state = {
+      trip: {
+        _id: this.props.trip._id
+      }
+    }
 
   handleChange = event => {
     this.setState({ trip: { ...this.state.trip, [event.target.name]: event.target.value } })
@@ -16,20 +18,30 @@ class CreateTrip extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('event ', event)
-    const { user } = this.props
-    createTrip(this.state.trip, user)
+    console.log('Update Trip Properties => | ', this.state.trip, this.props.user)
+    updateTrip(this.state.trip, this.props.user)
       .then((response) => {
-        // this.props.history.push(`/trips/${response.data.book._id}`)  <--- Pushes to unique trip.
-        this.props.history.push('/trips')
+        this.props.history.push(`/trips/${this.state.trip._id}`)
+        // this.props.history.push('/trips')
       })
       .catch(console.error)
   }
 
+  // async componentDidMount () {
+  //   try {
+  //     this.setState({ user: this.props.user })
+  //     this.setState({ trip: this.props.trip })
+  //     console.log('this State is => ', this.state)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+
   render () {
     let updateTrip = ''
+    const { trip } = this.props
     const shouldUpdate = (handleChange) => {
-      if (this.state.trip._duration > 1) {
+      if (trip.destinations.length > 1) {
         updateTrip = (
           <Fragment>
             <Form.Check
@@ -42,13 +54,6 @@ class CreateTrip extends Component {
           </Fragment>
         )
       }
-      if (this.state.trip._duration < 2) {
-        updateTrip = (
-          <Fragment>
-            <h1>Time to add some destinations!</h1>
-          </Fragment>
-        )
-      }
     }
     shouldUpdate()
     return (
@@ -57,9 +62,10 @@ class CreateTrip extends Component {
         handleSubmit={this.handleSubmit}
         trip={this.state.trip}
         updateTrip={updateTrip}
+        placeHolderTrip={this.props.trip}
       />
     )
   }
 }
 
-export default withRouter(CreateTrip)
+export default withRouter(UpdateTrip)

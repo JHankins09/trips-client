@@ -24,19 +24,44 @@ export const indexTrips = user => {
 }
 
 export const addDestination = (destination, user, trip) => {
-  console.log('user info is ', user, 'trip info is ', trip)
   return axios({
     method: 'POST',
-    url: `${apiUrl}/trips`,
+    url: `${apiUrl}/destinations`,
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data: {
-      destination: {
-        name: destination.name,
-        time_spent: destination.time_spent,
-        trip: trip._id
-      }
+    data: { destination }
+  })
+}
+
+export const showDestination = (user, id) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + `/destinations/${id}`,
+    headers: {
+      'Authorization': `Token token=${user.token}`
     }
   })
+}
+
+export const deleteDestination = (destination, user) => {
+  return (axios({
+    method: 'DELETE',
+    url: `${apiUrl}/destinations/${destination}`,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  }))
+}
+
+export const updateDestination = (destination, user) => {
+  console.log('Here is what we are F`in with... ', destination)
+  return (axios({
+    method: 'PATCH',
+    url: `${apiUrl}/destinations/${destination._id}`,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: { destination }
+  }))
 }
