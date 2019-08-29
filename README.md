@@ -1,129 +1,160 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# Trips
 
-# react-auth-template
+##### This repo is built as a two part application:
 
-A front-end framework template for starting projects with a recent version of
-either the [Rails API Template](https://git.generalassemb.ly/ga-wdi-boston/rails-api-template)
-or the [Express API Template](https://git.generalassemb.ly/ga-wdi-boston/express-api-template).
+- Client (Front-End): https://github.com/JHankins09/trips-client
+- API (Back-End): https://github.com/JHankins09/trips-API
 
-## Installation
 
-1. [Download](../../archive/master.zip) this template.
-1. Unzip and rename the template directory (`unzip ~/Downloads/react-auth-template-master.zip`).
-1. Move into the new project and `git init`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace `react-auth-template` in `package.json` with your
-   projects name.
-1. Replace the `"homepage"` field in `package.json` with your (public) Github
-   account name and repository name.
-1. Install dependencies with `npm install`.
-1. `git add` and `git commit` your changes.
-1. Run the development server with `npm start`.
+## Getting Started
 
-## Deployment
+### Client Install, Setup, and Contributing
+1. Fork and clone [this](https://github.com/JHankins09/trips-client) repository.
+1. To contribute, be sure to checkout to a new branch for your work.
+  - Can be done in command line with ```git checkout -b <your-branch-name-here>```
+1. Install dependencies by running the following in your command line: ```npm install```.
+  - All required NPM packages are present in package.json
+2. To launch the app in a local browser, additionally run the command ```npm start``` in the command line.
 
-Before deploying, you first need to make sure the `homepage` key in your
-`package.json` is pointing to the correct value. It should be the url of your
-deployed application.
+###### NOTE: You need to be running the trips API locally to interact with the local client.
 
-To deploy you should first make sure you are on the `master` branch with a
-clean working directory, then you can run `npm run deploy` and wait to see if
-it runs successfully.
+### API Install and setup
+1. Fork and clone [this](https://github.com/JHankins09/trips-API) repository.
+1. To contribute, be sure to checkout to a new branch for your work.
+  - Can be done in command line with ```git checkout -b <your-branch-name-here>```
+1. Install dependencies by running the following in your command line: ```npm install```.
+   - All required NPM packages are present in package.json
+2. To launch the api (required to run local browser Client) run the command ```npm run server``` in the command line
 
-## About
+---
 
-This template is derived from GA Boston's [react-template](https://git.generalassemb.ly/ga-wdi-boston/react-template).
-Most of the development dependencies, such as linters, SCSS compiler, Webpack
-config, NPM scripts, etc in this repo come from there.
+### Overview
+This app is meant to provide a space to plan, build, and review different types of trips for those with an adventurous spirit! Natively built to accomidate RoadTrips, Camping, Hiking, or Biking, the app allows for flexible addition of locations, as well as a 'peaks and pits' feature to review the pros and cons of visited destinations.
 
-It includes all the components and routes needed to sign up, sign in, change
-passwords, and sign out of an API built with either template linked above, with
-no need for modification.
+### Planning
 
-**NOTE**: You should customize the included components to suit you app! They're
-provided as a guide and a bare minimum of functionality and style. Consider
-changing the provided SCSS styles, modifying the auth code, improving the flash
-messages, etc.
+#### Initial Stories
++ As a visitor, I want to be able to create an account and become a user.
++ As a user, I want to be able to log in, log out, and change my password.
++ As a visitor, I want to be able to see published trips.
++ As a user, I want to be able to create or delete trips.
++ As a user, I want to be able to add, remove or edit destinations to my trips.
++ As a user, I want to be able to distinguish completed vs planned trips.
++ As a user, I want to decide whether my trips will be made public or kept private.
 
-## Structure
+#### Stretch Stories
++ As a user, I want to see my trip plotted on a map.
++ As a user, I want to search public trips by destination.
++ As a user, I want to be able to select my transportation method on my trip.
++ As a user, I want to be able to rate my and public trips.
 
-The top-level `App` component stores the currently authenticated
-user in state, as well as data related to the flash messages. `App` renders the
-`Header` component, and a list of routes, each of which render a component from
-`src/components`. The `src/api` directory has a component file, `auth.js`, which
-contains all the needed `axios` calls pertaining to authentication.
+#### SUPER Stretch Stories
++ As a user, I want to be able to rate destinations individually.
++ As a user, I want to be able to search destinations by rating before I add them to my trip.
++ As a user, I want to be able to read other users pit’s and peaks of a destination before I add it to my trip.
 
-You can follow this pattern in your app as well. For instance, if you are making
-an app that keeps track of books, you might want a `src/api/books.js`, which
-contains its own `axios` call pertaining to your books resource CRUD actions.
-Using a separate directory within `components` for each individual component you
-add makes it easy to locate and update components and has the added benefit of
-making it easy to create custom styles that apply to that specific component.
-To apply component specific styles, add a file to the component's directory such
-as `ComponentName.scss` and then import it directly into the component with
-`import './ComponentName.scss'`.  This will keep your styles modularized and
-make it easier to make changes at the component level.
+---
 
-## Features
+#### Initial Wire framing
 
-### `<AuthenticatedRoute />`
+##### ERD
+![image](https://media.git.generalassemb.ly/user/21061/files/6c9cc980-c7ea-11e9-921d-229c82b0ca30)
 
-This template contains a handy component for creating routes that require a
-user to be authenticated before visiting. This component lives in
-`src/auth/components/AuthenticatedRoute.js` and is already required in `App`.
-It's a thin wrapper around React Router's `<Route />` component. The only
-difference is that it expects a prop called `user`, and if that prop is falsy,
-it will render a `<Redirect />` that takes the user to `/`. **To use
-it, you must pass it the user as a prop!**
+#### WireFrame
+![image](https://media.git.generalassemb.ly/user/21061/files/7cb4a900-c7ea-11e9-934d-c832900597ef)
 
-It supports both the `component=` and `render=` attributes, but like `<Route />`
-it will not forward props to the component if you use `component=`.
+#### Application Screenshot
 
-### `<AutoAlertDismiss />` Component
+![image](https://media.git.generalassemb.ly/user/21061/files/13e85d80-ca84-11e9-8744-3bfc8b90a85b)
 
-This template also already contains a component that displays user messages.
-Messages are configurable via redux actions.  This component can be found in
-`src/components/AutoAlertDismiss/AutoAlertDismiss.js`. **There is no need to add
-this component to your app. It is already required in `App`.**  A single
-component instance is used to manage all alerts application-wide.
+#### API Route Table
 
-The alert can be used by passing the alert method to a rendered route.  The
-alert method expects an object with a message and a type property.
+Verb         |	URI Pattern
+------------ | -------------
+GET | /trips
+GET | /trips/:id
+POST | /trips
+PATCH | /trips/:id
+DELETE | /trips/:id
+GET | /destinations
+GET | /destinations/:id
+POST | /destinations
+PATCH | /destinations/:id
+DELETE | /destinations/:id
 
-Use this component in conjunction with the `messages.js` file in the same
-directory to create and manage all of your application messages in one place.
+---
 
-The type property must be a Bootstrap alert type, as this component is merely a
-wrapper around the [react-bootstrap Alert
-component](https://react-bootstrap.github.io/components/alerts/).  The types it
-will accept are: 'primary', 'secondary', 'success', 'danger', 'warning', 'info',
-'light', and 'dark'.
+#### This project was planned to be built in 3 primary parts:
+  1. Build out API
+  * Build out API to allow for user, trips, destinations
+  * Apply relationships that allow users to create, manipulte or delete trips, as well as destinations. Additional relationships built for trips to maintain destinations as a property.
+  * Allow for users to view only self built trips.
+  2. Development of Client
+  * Include user authentication functionality including sign-up, sign-in, change-password, etc.
+  * Build Trip content for creating and viewing trips - as well as ability to delete
+  * Build out Destination functionality to create Destinations, include them in the selected Trip, and edit or delete them.
+  3. Style client to improve user flow and set base for future functionality implimentation.
 
- To change the duration of the message, replace `5000` with a value of your
- choice (in milliseconds) in this component's `componentDidMount` method.
+### Development Process
 
-### `src/apiConfig.js`
+Majority of time was spent working with React to preform API calls. This was extremely difficult. Further exposure to React will go a long way into being able to fully leverage React with it's axios component.
 
-Just like in
-[browser-template](https://git.generalassemb.ly/ga-wdi-boston/browser-template),
-this file will determine whether you're in a production or development
-environment and choose an API URL accordingly. Don't forget to replace the
-`production` URL with your deployed API's URL.
+Front end was initially a challenge as React is a new technology, however over the course of development, my understanding and comfort seemed to grow quickly. While my final output is a ways off from my initial intentions, I am happy with the product and am excited to continue to build on it moving forward.
 
-## Tasks
+### Problem Solving Strategy
 
-Developers should run these often!
+All components were built to be as transferable as possible. This allowed for solving of one problem to scale out to a number of additional elements within the build.
 
-- `npm run nag`: runs code quality analysis tools on your code and complains.
-- `npm run make-standard`: reformats all your code in the JavaScript Standard
-  Style.
-- `npm run start`: generates bundles, watches, and livereloads.
-- `npm run build`: place bundled styles and scripts where `index.html` can find
-    them
-- `npm run deploy`: builds and deploys master branch
+Majority of problems were experience in th Client side, and refrences to the [React.JS](https://reactjs.org/) online documentation was hugely helpful.
 
-## [License](LICENSE)
+---
 
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+## Unresolved issues / features for future release
+
+- Responsive Design
+  * Mobile UI
+  * Tablet UI
+
+- Interactive UI
+  * Stronger form usage
+  * Higher sign-up rate upon visit
+
+- AWS/Image calls to allow for destination specific photo albums.
+
+- Public facing catalog for completed trips, with the possibility of chat for users to pose questions and ideas to each-other.
+
+- Stronger UI with animations and interactive components.
+
+- Change alerts to 'push notification' style, ideally to easy the clutter in the bottom of the app.
+
+- Fully utilize the 'Tool bar' feature.
+
+- SEO enabled
+
+## Built With (technologies used)
+
+### Front End Client
+- JavaScript
+- React.JS
+- JSX
+- JSON
+- Axios
+- CSS
+- HTML
+
+### Back End API
+- JavaScript
+- Mongo.DB
+- Express.API
+
+## Versioning
+V.1 -> released 6/29/19
+
+## Author
+### [James B. Hankins](https://jhankins09.github.io/)
+
+LinkedIn:   https://www.linkedin.com/in/james-hankins/
+GitHub:     https://github.com/JHankins09
+
+## Acknowledgments
+This project is built as the result of participating in General Assembly Boston's Software Engineering Immersive course.
