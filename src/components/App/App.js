@@ -32,6 +32,8 @@ class App extends Component {
 
   setTrip = trip => this.setState({ trip })
 
+  clearTrip = () => this.setState({ trip: null })
+
   setDestination = destination => this.setState({ destination })
 
   setUser = user => this.setState({ user })
@@ -73,7 +75,7 @@ class App extends Component {
             < Trips alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute exact user={user} path='/createtrip/' render={() => (
-            <CreateTrip user={user} />
+            <CreateTrip user={user} setTrip={this.setTrip} clearTrip={this.clearTrip} />
           )} />
           <AuthenticatedRoute exact user={user} path='/trips/:id' render={() => (
             < Trip user={user} setTrip={this.setTrip} />

@@ -13,7 +13,10 @@ class AddDestination extends Component {
       pit: '',
       peak: ''
     },
-    trip: {}
+    trip: {},
+    destinationTitle: {
+      title: ''
+    }
   }
 
   handleChange = event => {
@@ -22,17 +25,15 @@ class AddDestination extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    console.log('Add Destination Data => | ', this.state.destination, this.state.user, this.state.trip)
     addDestination(this.state.destination, this.state.user, this.state.trip)
       .then((response) => {
         this.state.trip.destinations.push(response.data.destination._id)
-        updateTrip(this.state.trip, this.state.user)
-          .then((response2) => {
-            showTrip(this.state.user, this.state.trip._id)
-              .then((response3) => {
-                console.log('Response Data => ', response3)
-                this.props.history.push(`/trips/${response3.data.trip._id}`)
-              })
-          })
+        return updateTrip(this.state.trip, this.state.user)
+      }).then((response2) => {
+        return showTrip(this.state.user, this.state.trip._id)
+      }).then((response3) => {
+        this.props.history.push(`/trips/${response3.data.trip._id}`)
       })
       .catch(console.error)
   }
@@ -44,6 +45,13 @@ class AddDestination extends Component {
       this.setState({ destination: {
         trip: this.props.trip._id
       } })
+      let destinationTitle = ''
+      if (this.props.trip.destinations.length) {
+        destinationTitle = `Add stop number ${this.props.trip.destinations.length + 1}`
+      } else {
+        destinationTitle = 'Where are you starting your journey?'
+      }
+      this.setState({ destinationTitle: { title: destinationTitle } })
     } catch (error) {
       console.error(error)
     }
@@ -55,7 +63,8 @@ class AddDestination extends Component {
         destination={this.state.destination}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        tripId={this.state.trip._id}
+        tripId={this.props.trip._id}
+        destinationType={this.state.destinationTitle.title}
       />
     )
   }

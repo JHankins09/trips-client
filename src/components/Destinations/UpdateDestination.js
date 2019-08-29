@@ -9,6 +9,9 @@ class UpdateDestination extends Component {
     state = {
       destination: {
         _id: this.props.destination._id
+      },
+      destinationTitle: {
+        title: ''
       }
     }
 
@@ -25,6 +28,13 @@ class UpdateDestination extends Component {
   }
 
   async componentDidMount () {
+    let destinationTitle = ''
+    if (this.props.trip.destinations.length) {
+      this.props.trip.destinations.length > 2 ? destinationTitle = 'New Destination' : destinationTitle = 'Where are you headed?'
+    } else {
+      destinationTitle = 'Where are you starting your journey?'
+    }
+    this.setState({ destinationTitle: { title: destinationTitle } })
   }
 
   render () {
@@ -42,6 +52,7 @@ class UpdateDestination extends Component {
         placeHolderDestination={this.props.destination}
         tripId={this.props.trip._id}
         updateDestination={updateDestination}
+        destinationType={this.state.destinationTitle.title}
       />
     )
   }

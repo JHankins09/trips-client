@@ -36,8 +36,7 @@ export const createTrip = (trip, user) => {
         name: trip.name,
         type: trip.type,
         private: trip.private,
-        completed: trip.completed,
-        _duration: trip._duration
+        completed: trip.completed
       }
     }
   })

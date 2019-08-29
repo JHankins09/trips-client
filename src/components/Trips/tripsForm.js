@@ -16,7 +16,6 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTri
         name="name"
         type="text"
         placeholder={ placeHolderTrip.name ? placeHolderTrip.name : 'Name your adventure!' }
-        value={trip.name}
         onChange={handleChange}
         required
       />
@@ -27,7 +26,6 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTri
       <Form.Control
         name="type"
         as="select"
-        value={trip.type}
         placeholder={placeHolderTrip.type ? placeHolderTrip.type : ''}
         onChange={handleChange}
         required
@@ -39,14 +37,6 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTri
         <option>Other</option>
       </Form.Control>
     </Form.Group>
-
-    <Form.Check
-      type={'checkbox'}
-      name='private'
-      value={true}
-      label={'Would you like to keep this trip private?'}
-      onChange={handleChange}
-    />
 
     <Button variant="primary" type="submit">
       Submit

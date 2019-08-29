@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolderDestination, tripId, updateDestination }) => (
+const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolderDestination, tripId, updateDestination, destinationType }) => (
 
   <Form onSubmit={ handleSubmit }>
     { !updateDestination
@@ -12,8 +12,7 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
           <Form.Control
             name="name"
             type="text"
-            placeholder="Where you headed?"
-            value={destination.name}
+            placeholder={ destinationType }
             onChange={handleChange}
             required
           />
@@ -25,7 +24,6 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
             name="time_spent"
             type="number"
             placeholder="In days, please."
-            value={destination.time_spent}
             onChange={handleChange}
             required
           />
@@ -38,7 +36,6 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
             name="name"
             type="text"
             placeholder={placeHolderDestination.name}
-            value={destination.name !== '' ? destination.name : placeHolderDestination.name}
             onChange={handleChange}
           />
         </Form.Group>
@@ -49,7 +46,6 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
             name="time_spent"
             type="number"
             placeholder={placeHolderDestination.time_spent}
-            value={destination.time_spent}
             onChange={handleChange}
           />
         </Form.Group>
@@ -60,7 +56,6 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
             name="peak"
             type="text"
             placeholder={placeHolderDestination.peak}
-            value={destination.peak}
             onChange={handleChange}
           />
         </Form.Group>
@@ -71,7 +66,6 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
             name="pit"
             type="text"
             placeholder={placeHolderDestination.pit}
-            value={destination.pit}
             onChange={handleChange}
           />
         </Form.Group>

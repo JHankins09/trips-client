@@ -57,7 +57,11 @@ class Trip extends Component {
     if (trip.destinations) {
       destinationJsx = this.state.trip.destinations.map(stop => (
         <li key={stop._id}>
-          Stop {this.state.trip.destinations.indexOf(stop) + 1} is: <Link to={`/trips/${trip._id}/destinations/${stop._id}`}>{stop.name}</Link>
+          Destination {this.state.trip.destinations.indexOf(stop) + 1} is: <Link to={`/trips/${trip._id}/destinations/${stop._id}`}>{stop.name}</Link>
+          {stop.peak || stop.pit ? <ul>
+            {stop.peak && <li>The highlight of {stop.name} was: {stop.peak}</li>}
+            {stop.pit && <li>The biggest letdown of {stop.name} was: {stop.pit}</li>}
+          </ul> : '' }
         </li>
       ))
     }

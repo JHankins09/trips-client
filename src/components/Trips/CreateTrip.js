@@ -7,11 +7,9 @@ import TripForm from './tripsForm.js'
 class CreateTrip extends Component {
   state = {
     trip: {
-      name: '',
       type: 'Road Trip',
       private: false,
-      completed: false,
-      _duration: 0
+      completed: false
     }
   }
 
@@ -21,13 +19,29 @@ class CreateTrip extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('event ', event)
-    const { user } = this.props
+    let createdTrip = {}
+    const { user, setTrip } = this.props
     createTrip(this.state.trip, user)
       .then((response) => {
-        this.props.history.push(`/trips/${response.data.trip._id}/add-destination`)
+        console.log('This is the created trip => | ', response)
+        this.setState({ trips: response.data.trip })
+        createdTrip = response.data.trip
+        console.log('The current trip is => | ', createdTrip)
+      })
+      .then(() =>
+        setTrip(createdTrip))
+      .then(() => {
+        this.props.history.push(`/trips/${createdTrip._id}/add-destination`)
       })
       .catch(console.error)
+  }
+
+  async componentDidMount () {
+    try {
+      this.props.clearTrip()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render () {
@@ -36,6 +50,7 @@ class CreateTrip extends Component {
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         trip={this.state.trip}
+        updateTrip={null}
         placeHolderTrip={this.state.trip}
       />
     )
