@@ -1,6 +1,6 @@
 {
   "name": "trips",
-  "homepage": "https://jhankins09.github.io/trips-client",
+  "homepage": "https://jhankins09.github.io/trips-client/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
