@@ -25,7 +25,6 @@ class AddDestination extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('Add Destination Data => | ', this.state.destination, this.state.user, this.state.trip)
     addDestination(this.state.destination, this.state.user, this.state.trip)
       .then((response) => {
         this.state.trip.destinations.push(response.data.destination._id)

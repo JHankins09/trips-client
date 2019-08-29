@@ -17,7 +17,6 @@ class UpdateDestination extends Component {
 
   handleChange = event => {
     this.setState({ destination: { ...this.state.destination, [event.target.name]: event.target.value } })
-    console.log(this.state.destination)
   }
 
   handleSubmit = event => {

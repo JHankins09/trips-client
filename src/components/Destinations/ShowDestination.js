@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { showDestination } from './api'
 import Button from 'react-bootstrap/Button'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Badge from 'react-bootstrap/Badge'
 
 class ShowDestination extends Component {
   state = {
@@ -30,20 +32,49 @@ class ShowDestination extends Component {
     for (let i = 0; i < Object.keys(trip.destinations).length; i++) {
       stops.push(trip.destinations[i]._id)
     }
-    console.log('Length Formula ', stops.length - stops.indexOf(destination._id) - 1)
+    const peak = () => (
+      destination.peak
+        ? <div>
+          <Badge variant='success'>Peak - {destination.peak}</Badge><hr/>
+          <p>{destination.peak}</p>
+        </div>
+        : ''
+    )
+    const pit = () => (destination.pit
+      ? <div>
+        <Badge variant='danger'>Pit...</Badge> <hr/>
+        <p>{destination.pit}</p>
+      </div>
+      : ''
+    )
 
     return (
       <Fragment>
-        <div key={destination._id}>
-          <ul>
-            <li> You are at: {destination.name} </li>
-            <li> This is stop {stops.indexOf(destination._id) + 1} on your journey! </li>
-            <li> Only {stops.length - stops.indexOf(destination._id) - 1} stops remaining! </li>
-            <li> <Button href={`#/trips/${trip._id}/destinations/${destination._id}/edit`}>Edit this destination</Button></li>
-            <li> <Button href={`#/trips/${trip._id}/destinations/${destination._id}/delete`}>
-            Delete this destination from your trip
-            </Button></li>
-          </ul>
+        <div className="row">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
+            <Jumbotron className='jtron'>
+              <div key={destination._id}>
+                <h3>{destination.name}</h3>
+                <p>stop {stops.indexOf(destination._id) + 1} of {stops.length} on your journey!</p>
+                <hr/>
+                <p>{stops.indexOf(destination._id) + 1} down, {stops.length - (stops.indexOf(destination._id) + 1)} to go </p>
+                <hr/>
+                <div className='row d-flex justify-content-around'>
+                  <Fragment>
+                    { peak() }
+                  </Fragment>
+                  <Fragment>
+                    { pit() }
+                  </Fragment>
+                </div>
+              </div>
+            </Jumbotron>
+          </div>
+        </div>
+        <div className='row toolbar col-12 d-flex justify-content-around'>                  <Button variant='dark' href={`#/trips/${trip._id}/destinations/${destination._id}/edit`}>Edit this destination</Button>
+          <Button variant='dark' href={`#/trips/${trip._id}/destinations/${destination._id}/delete`}>
+              Delete this stop
+          </Button>
         </div>
       </Fragment>
     )

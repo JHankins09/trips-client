@@ -3,16 +3,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
-const TripStops = ({ trip }) => (
-  trip.destinations.map(destination => (
-    <li key={destination._id}> Stop {trip.destinations.indexOf(destination) + 1} is {destination.name} </li>
-  )))
-
 const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTrip }) => (
   <div className="row">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <Jumbotron className='jtron'>
-        {updateTrip ? '' : <h3>Build it, do it, trip it</h3>}
+        {updateTrip ? <h3>Making some changes?</h3> : <h3>Build it, do it, trip it</h3>}
         <Form onSubmit={ handleSubmit }>
 
           <Form.Group controlId="name">
@@ -52,7 +47,5 @@ const TripForm = ({ trip, handleChange, handleSubmit, updateTrip, placeHolderTri
     </div>
   </div>
 )
-
-console.log(TripStops)
 
 export default TripForm

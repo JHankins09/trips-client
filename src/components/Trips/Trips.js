@@ -27,9 +27,8 @@ class Trips extends Component {
   }
 
   render () {
-    console.log(this.state.trips[0])
     const tripsJsx = this.state.trips.filter(trip => trip.owner === this.props.user._id).map(trip => (
-      <Card style={{ marginLeft: '5px', marginRight: '5px', marginBottom: '15px' }} key={trip._id} className='col-sm-3 tripcard'>
+      <Card style={{ marginLeft: '5px', marginRight: '5px', marginBottom: '15px' }} key={trip._id} className='col-sm-8 col-md-6 col-lg-3 tripcard'>
         <Card.Body>
           <Card.Title>{trip.name}</Card.Title>
           <Badge variant="warning">{trip.type}</Badge>
@@ -46,7 +45,7 @@ class Trips extends Component {
         <div className='row d-flex justify-content-around' style={{ marginTop: '15px' }}>
           { this.state.trips.length > 0 ? tripsJsx : 'Loading...' }
         </div>
-        <div className='row toolbar d-flex justify-content-around'>
+        <div className='row toolbar col-12 d-flex justify-content-around'>
           <Button variant='dark' href={'#/createtrip'}>Create a new adventure</Button>
         </div>
       </Fragment>

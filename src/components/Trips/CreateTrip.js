@@ -23,10 +23,8 @@ class CreateTrip extends Component {
     const { user, setTrip } = this.props
     createTrip(this.state.trip, user)
       .then((response) => {
-        console.log('This is the created trip => | ', response)
         this.setState({ trips: response.data.trip })
         createdTrip = response.data.trip
-        console.log('The current trip is => | ', createdTrip)
       })
       .then(() =>
         setTrip(createdTrip))

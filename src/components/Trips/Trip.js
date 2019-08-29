@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { showTrip } from './api'
 import Button from 'react-bootstrap/Button'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Badge from 'react-bootstrap/Badge'
+import Card from 'react-bootstrap/Card'
 
 class Trip extends Component {
   state = {
@@ -33,11 +36,13 @@ class Trip extends Component {
         if (this.props.user._id === trip.owner) {
           if (trip.destinations.length > 1) {
             editButton = (
-              <Button href={`#trips/${trip._id}/edit`}>Edit Trip</Button>
+              <Button variant="dark" href={`#trips/${trip._id}/edit`}>Edit Trip</Button>
             )
           } else {
             editButton = (
-              <p>Add at least 1 more destination to start editing your trip!</p>
+              <Fragment>
+                <Badge variant='danger'>Min 2 destinations required to edit trip</Badge>
+              </Fragment>
             )
           }
         }
@@ -45,41 +50,61 @@ class Trip extends Component {
     }
     fillEditButton()
 
-    const deleteButton = (<Button
+    const deleteButton = (<Button variant="dark"
       href={`#trips/${trip._id}/delete`}>
       Delete trip</Button>)
 
     const addDestination = (
-      <Button href={`#trips/${trip._id}/add-destination`}>Add a destination</Button>
+      <Button variant="dark" href={`#trips/${trip._id}/add-destination`}>Add a destination</Button>
     )
 
     let destinationJsx = 'Loading'
     if (trip.destinations) {
       destinationJsx = this.state.trip.destinations.map(stop => (
-        <li key={stop._id}>
-          Destination {this.state.trip.destinations.indexOf(stop) + 1} is: <Link to={`/trips/${trip._id}/destinations/${stop._id}`}>{stop.name}</Link>
-          {stop.peak || stop.pit ? <ul>
-            {stop.peak && <li>The highlight of {stop.name} was: {stop.peak}</li>}
-            {stop.pit && <li>The biggest letdown of {stop.name} was: {stop.pit}</li>}
-          </ul> : '' }
-        </li>
+        <Card style={{ marginLeft: '5px', marginRight: '5px', marginBottom: '15px' }} key={stop._id} className='col-sm-8 col-md-5 col-lg-5 stopcard'>
+          <Card.Body>
+            <Card.Text>
+              {`Dest. ${this.state.trip.destinations.indexOf(stop) + 1}:`}<br/>
+              {stop.name}
+            </Card.Text>
+            <hr/>
+            <Card.Text>
+              {stop.peak || stop.pit
+                ? <Fragment>
+                  {stop.peak && <Badge variant="success">{stop.peak}</Badge>}
+                  {stop.pit && <Badge variant="danger">{stop.pit}</Badge>}
+                </Fragment>
+                : '' }
+            </Card.Text>
+            <Button variant="dark" href={`#trips/${trip._id}/destinations/${stop._id}`}>See more</Button>
+          </Card.Body>
+        </Card>
       ))
     }
 
     return (
       <Fragment>
-        {trip && (
-          <Fragment>
-            <h1>{trip.name}</h1>
-            <h2>{trip.type || 'No Author Available'}</h2>
-            <ul>
-              {destinationJsx}
-              {addDestination}
-              {editButton}
-              {deleteButton}
-            </ul>
-          </Fragment>
-        )}
+        <div className="row">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
+            <Jumbotron className='jtron'>
+              {trip && (
+                <Fragment>
+                  <h1>{trip.name}</h1>
+                  <Badge variant="warning">{trip.type} style adventure!</Badge>
+                  <hr/>
+                </Fragment>
+              )}
+              <div className='row d-flex justify-content-around'>
+                {destinationJsx}
+              </div>
+            </Jumbotron>
+          </div>
+        </div>
+        <div className='row toolbar col-12 d-flex justify-content-around'>
+          {editButton}
+          {addDestination}
+          {deleteButton}
+        </div>
       </Fragment>
     )
   }

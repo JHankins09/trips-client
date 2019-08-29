@@ -9,12 +9,12 @@ body {
 
 }
 
-.jtron, .tripcard {
+.jtron, .tripcard, .stopcard {
   background-color: rgba(191, 157, 133, 0.5);
 }
 
 
-.nav-bar {
+.nav-bar, .stopcard {
   background-color: rgba(186, 131, 139, 0.5);
 }
 
@@ -22,12 +22,20 @@ body {
   margin-bottom: 45px;
 }
 
+.stopcard {
+  margin-bottom: 45px;
+}
+
+.modulebuttons {
+  margin: 0;
+  padding: auto;
+}
+
 .toolbar {
   background: rgba(100, 140, 125, 0.5);
   overflow: hidden;
-  position: fixed;
+  position: sticky;
   bottom: 15px;
-  width: 90%;
   padding: 15px 0;
   border-radius: 5px;
 }

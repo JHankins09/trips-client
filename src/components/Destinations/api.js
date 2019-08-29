@@ -55,7 +55,6 @@ export const deleteDestination = (destination, user) => {
 }
 
 export const updateDestination = (destination, user) => {
-  console.log('Here is what we are F`in with... ', destination)
   return (axios({
     method: 'PATCH',
     url: `${apiUrl}/destinations/${destination._id}`,
