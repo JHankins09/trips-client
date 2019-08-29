@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import { indexTrips } from './api'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 
 class Trips extends Component {
   // constructor
@@ -26,23 +27,28 @@ class Trips extends Component {
   }
 
   render () {
+    console.log(this.state.trips[0])
     const tripsJsx = this.state.trips.filter(trip => trip.owner === this.props.user._id).map(trip => (
-      <Card style={{ width: '18rem' }} key={trip._id}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card style={{ marginLeft: '5px', marginRight: '5px', marginBottom: '15px' }} key={trip._id} className='col-sm-3 tripcard'>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>{trip.name}</Card.Title>
+          <Badge variant="warning">{trip.type}</Badge>
+          <hr/>
           <Card.Text>
-            {`Some quick example text to build on the card title and make up the bulk of
-            the card's content.`}
+            {`Get your journey rolling through ${trip.destinations.length} locations`}
           </Card.Text>
-          <Button variant="primary" href={`#/trips/${trip._id}`}>Go somewhere</Button>
+          <Button variant="outline-dark" href={`#/trips/${trip._id}`}>Journey on {trip.name}</Button>
         </Card.Body>
       </Card>
     ))
     return (
       <Fragment>
-        <h4>Trips</h4>
-        { this.state.trips.length > 0 ? tripsJsx : 'Loading...' }
+        <div className='row d-flex justify-content-around' style={{ marginTop: '15px' }}>
+          { this.state.trips.length > 0 ? tripsJsx : 'Loading...' }
+        </div>
+        <div className='row toolbar d-flex justify-content-around'>
+          <Button variant='dark' href={'#/createtrip'}>Create a new adventure</Button>
+        </div>
       </Fragment>
     )
   }
