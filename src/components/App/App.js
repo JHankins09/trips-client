@@ -17,6 +17,7 @@ import DeleteTrip from '../Trips/DeleteTrip'
 import ShowDestination from '../Destinations/ShowDestination.js'
 import DeleteDestination from '../Destinations/DeleteDestination.js'
 import UpdateDestination from '../Destinations/UpdateDestination.js'
+import Home from '../Shared/Home'
 
 class App extends Component {
   constructor () {
@@ -59,6 +60,9 @@ class App extends Component {
           />
         ))}
         <main className="container">
+          <Route exact path='/' render={() => (
+            <Home user={user} />
+          )} />
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
