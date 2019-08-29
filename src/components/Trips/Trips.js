@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { indexTrips } from './api'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 class Trips extends Component {
   // constructor
@@ -25,11 +27,17 @@ class Trips extends Component {
 
   render () {
     const tripsJsx = this.state.trips.filter(trip => trip.owner === this.props.user._id).map(trip => (
-      <div key={trip._id}>
-        <li>
-          <Link to={`trips/${trip._id}`}>{trip.name}</Link>
-        </li>
-      </div>
+      <Card style={{ width: '18rem' }} key={trip._id}>
+        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            {`Some quick example text to build on the card title and make up the bulk of
+            the card's content.`}
+          </Card.Text>
+          <Button variant="primary" href={`#/trips/${trip._id}`}>Go somewhere</Button>
+        </Card.Body>
+      </Card>
     ))
     return (
       <Fragment>
