@@ -7,6 +7,7 @@ const DestinationsForm = ({ destination, handleChange, handleSubmit, placeHolder
   <Form onSubmit={ handleSubmit }>
     { !updateDestination
       ? <Fragment>
+        <h3>Add your first destination</h3>
         <Form.Group controlId="name">
           <Form.Label>Destination</Form.Label>
           <Form.Control

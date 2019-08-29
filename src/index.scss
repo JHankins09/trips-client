@@ -4,13 +4,34 @@ body {
   background-image: url('assets/tripsbkg.jpg');
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
+  background-position: fixed;
+  background-attachment: fixed;
 
 }
 
-.jtron {
+.jtron, .tripcard {
   background-color: rgba(191, 157, 133, 0.5);
 }
 
+
 .nav-bar {
   background-color: rgba(186, 131, 139, 0.5);
+}
+
+.tripcard {
+  margin-bottom: 45px;
+}
+
+.toolbar {
+  background: rgba(100, 140, 125, 0.5);
+  overflow: hidden;
+  position: fixed;
+  bottom: 15px;
+  width: 90%;
+  padding: 15px 0;
+  border-radius: 5px;
+}
+
+a {
+  color: #222222;
 }
